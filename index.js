@@ -128,6 +128,10 @@ var CloudFlare = PromiseObject.create({
 								return reject(new Error(
 									'Request Failed: ' + error
 								));
+							} else if (response.statusCode === 429) {
+								return reject(new Error(
+									'Request Failed: Too many requests' 
+								));
 							} else if ($config.required && body && !body[$config.required]) {
 								return reject(new Error(
 									'\nAPI Error: Response was missing required field (' + $config.required + ')'
